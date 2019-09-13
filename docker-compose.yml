@@ -1,0 +1,26 @@
+version: '2'
+services:
+  statsd:
+    build: .
+    ports:
+    - "8125:8125/tcp"
+    environment:
+    - STATSD_INTERFACE=tcp
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
+  statsd-udp:
+    build: .
+    ports:
+    - "8125:8125/udp"
+    environment:
+    - STATSD_INTERFACE=udp
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
